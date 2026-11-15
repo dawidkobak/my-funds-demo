@@ -1,0 +1,81 @@
+<mat-card class="vertical-tab-group-body" fxFlex="auto">
+  <mat-card-header>
+    <mat-card-title fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
+        <span>Analizy</span>
+      </div>
+      <button [disabled]="staticDemo" mat-raised-button (click)="openCreateDialog()" class="create-button">
+        <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+        Dodaj nową analizę
+      </button>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-table fxLayout="column" [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="companyName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Spółka </mat-header-cell>
+        <mat-cell *matCellDef="let stockAnalysis"> {{ stockAnalysis.companyName }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="ticker">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Ticker </mat-header-cell>
+        <mat-cell *matCellDef="let stockAnalysis"> {{ stockAnalysis.ticker || '-' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="industry">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Branża </mat-header-cell>
+        <mat-cell *matCellDef="let stockAnalysis"> {{ stockAnalysis.industry || '-' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+        <mat-cell *matCellDef="let stockAnalysis">
+          <span class="status-chip" [ngClass]="'status-' + stockAnalysis.status.toLowerCase()">
+            {{ getStatusLabel(stockAnalysis.status) }}
+          </span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="totalScore">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Wynik </mat-header-cell>
+        <mat-cell *matCellDef="let stockAnalysis"> {{ stockAnalysis.totalScore ?? '-' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="decision">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Decyzja </mat-header-cell>
+        <mat-cell *matCellDef="let stockAnalysis"> {{ getDecisionLabel(stockAnalysis.decision) }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Utworzono </mat-header-cell>
+        <mat-cell *matCellDef="let stockAnalysis"> {{ stockAnalysis.createdAt }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="completedAt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Zakończono </mat-header-cell>
+        <mat-cell *matCellDef="let stockAnalysis"> {{ stockAnalysis.completedAt || '-' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Analiza </mat-header-cell>
+        <mat-cell *matCellDef="let stockAnalysis" fxLayout="row" fxLayoutGap="8px">
+          <button
+            mat-stroked-button
+            (click)="openReportDialog(stockAnalysis)"
+            class="view-button"
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            fxLayoutGap="8px"
+            [disabled]="stockAnalysis.status !== 'COMPLETED'"
+          >
+            <fa-icon [icon]="['fas', 'eye']"></fa-icon>
+            <span>Zobacz</span>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-card-content>
+</mat-card>

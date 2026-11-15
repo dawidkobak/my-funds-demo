@@ -1,0 +1,31 @@
+.mat-mdc-row {
+  background-color: rgb(253, 253, 253);
+
+  &:hover {
+    background-color: rgb(245, 245, 245) !important;
+    transition: all .15s ease-in-out;
+    cursor: pointer;
+  }
+}
+
+.mat-mdc-header-cell, .mat-mdc-cell {
+  font-size: 14px;
+  padding-left: 24px !important;
+}
+
+.mat-mdc-header-cell {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.66px;
+  color: black;
+  background-color: rgb(253, 253, 253);
+  text-transform: uppercase;
+}
+
+.mat-mdc-no-data-row {
+  padding: 15px;
+}
+
+.mat-mdc-table {
+  border: 1px solid #e6e6e6;
+}

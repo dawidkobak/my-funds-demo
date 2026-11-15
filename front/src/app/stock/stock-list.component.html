@@ -1,0 +1,42 @@
+<mat-card class="vertical-tab-group-body" fxFlex="auto">
+  <mat-card-header>
+    <mat-card-title fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
+        <span>Aktywa</span>
+      </div>
+      <button [disabled]="staticDemo" mat-raised-button (click)="openCreateDialog()" class="create-button">
+        <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+        Dodaj nowe aktywo
+      </button>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-table fxLayout="column" [dataSource]="stocks">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Nazwa aktywa</mat-header-cell>
+        <mat-cell *matCellDef="let stock"> {{ stock.name }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="color">
+        <mat-header-cell *matHeaderCellDef> Kolor</mat-header-cell>
+        <mat-cell *matCellDef="let stock">
+          <div [ngStyle]="{'background-color': stock.color}" style="width: 20px; height: 20px; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 2px;"></div>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="modifications">
+        <mat-header-cell *matHeaderCellDef> Modyfikacje</mat-header-cell>
+        <mat-cell *matCellDef="let stock" fxLayout="row" fxLayoutGap="8px">
+          <button [disabled]="staticDemo" mat-stroked-button (click)="openModifyDialog(stock)" class="edit-button" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+            <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
+            <span>Edytuj</span>
+          </button>
+          <button [disabled]="staticDemo" mat-stroked-button (click)="openDeleteDialog(stock)" class="delete-button" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+            <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+            <span>Usuń</span>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="['name', 'color', 'modifications']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['name', 'color', 'modifications'];"></mat-row>
+    </mat-table>
+  </mat-card-content>
+</mat-card>

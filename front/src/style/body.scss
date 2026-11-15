@@ -1,0 +1,28 @@
+html, body {
+  margin: 0;
+  background-color: rgb(250, 250, 250);
+  height: 100%;
+}
+
+a.my-funds-link {
+  text-decoration: underline;
+}
+
+.vh-80 {
+  min-height: 80vh;
+}
+
+.mat-option-text {
+  font-size: 16px;
+}
+
+app-root {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

@@ -1,0 +1,118 @@
+:host {
+  mat-card-content {
+    padding-top: 24px;
+  }
+
+  mat-table {
+    ::ng-deep {
+      .mat-column-transactionType {
+        flex: 0 0 10%;
+        max-width: 10%;
+      }
+
+      .mat-column-stockName {
+        flex: 0 0 12%;
+        max-width: 12%;
+      }
+
+      .mat-column-walletName {
+        flex: 0 0 12%;
+        max-width: 12%;
+      }
+
+      .mat-column-amount {
+        flex: 0 0 10%;
+        max-width: 10%;
+      }
+
+      .mat-column-purchaseCost {
+        flex: 0 0 12%;
+        max-width: 12%;
+      }
+
+      .mat-column-purchaseDate {
+        flex: 0 0 12%;
+        max-width: 12%;
+      }
+
+      .mat-column-modifications {
+        flex: 0 0 32%;
+        max-width: 32%;
+      }
+    }
+  }
+
+  .type-buy {
+    color: #28a745;
+    font-weight: 500;
+  }
+
+  .type-sell {
+    color: #dc3545;
+    font-weight: 500;
+  }
+
+  .create-button {
+    background-color: #0864dc !important;
+    color: white !important;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      background-color: #0652b8 !important;
+    }
+
+    fa-icon {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .edit-button {
+    border: 1.5px solid #0864dc !important;
+    color: #0864dc !important;
+    padding: 0.5rem 0.75rem !important;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    white-space: nowrap !important;
+
+    &:hover {
+      background-color: #0864dc !important;
+      color: white !important;
+    }
+
+    fa-icon {
+      line-height: 1;
+      margin-right: 8px;
+    }
+
+    span {
+      line-height: 1;
+    }
+  }
+
+  .delete-button {
+    border: 1.5px solid #dc3545 !important;
+    color: #dc3545 !important;
+    padding: 0.5rem 0.75rem !important;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    white-space: nowrap !important;
+
+    &:hover {
+      background-color: #dc3545 !important;
+      color: white !important;
+    }
+
+    fa-icon {
+      line-height: 1;
+      margin-right: 8px;
+    }
+
+    span {
+      line-height: 1;
+    }
+  }
+}

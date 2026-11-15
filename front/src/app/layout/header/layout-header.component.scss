@@ -1,0 +1,55 @@
+@use '@angular/material' as mat;
+@use '../../../variables' as *;
+
+:host {
+  .demo-badge { font-size: 12px; color: #555; }
+  mat-toolbar {
+    background-color: white;
+    border-bottom: 1px solid rgb(220, 220, 220, 0.8);
+  }
+
+  .title {
+    color: mat.m2-get-color-from-palette($my-funds-palette, 500);
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .menu, .profile {
+    color: #2c2c2c;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .search-icon {
+    padding-right: 10px;
+  }
+
+  .my-funds-button {
+    &.development, &.staging {
+      color: #e63888;
+      border-color: #e63888;
+
+      &:hover {
+        color: white;
+        background-color: #e63888;
+      }
+    }
+  }
+
+  ::ng-deep {
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
+  }
+
+  @media (max-width: 700px) {
+    mat-toolbar {min-height: 78px; height: auto;}
+    .header-content {max-width: 100% !important; gap: 8px; padding: 8px 0;}
+    .header-brand {flex-direction: column !important; gap: 0 !important; align-items: flex-start !important;}
+    .header-brand .title {margin-right: 0 !important;}
+    .header-brand img {height: 32px;}
+    .demo-badge {font-size: 9px; white-space: normal; line-height: 16px;}
+    .header-profile {flex: 0 1 auto !important; max-width: 130px !important;}
+    .profile {font-size: 10px; white-space: normal; line-height: 16px;}
+  }
+}

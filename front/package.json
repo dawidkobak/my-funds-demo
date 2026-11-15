@@ -1,0 +1,49 @@
+{
+  "name": "my-funds-demo",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "compile": "tsc",
+    "prepare": "npm run compile",
+    "build": "ng build --configuration production",
+    "build:demo": "ng build --configuration demo"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/cdk": "22.2.7",
+    "@angular/common": "22.2.6",
+    "@angular/compiler": "22.2.6",
+    "@angular/core": "22.2.6",
+    "@angular/forms": "22.2.6",
+    "@angular/material": "22.2.7",
+    "@angular/platform-browser": "22.2.6",
+    "@angular/router": "22.2.6",
+    "@fortawesome/angular-fontawesome": "5.1.0",
+    "@fortawesome/fontawesome-svg-core": "7.3.1",
+    "@fortawesome/free-brands-svg-icons": "7.3.1",
+    "@fortawesome/free-regular-svg-icons": "7.3.1",
+    "@fortawesome/free-solid-svg-icons": "7.3.1",
+    "chart.js": "4.6.1",
+    "chartjs-adapter-date-fns": "3.0.0",
+    "chartjs-plugin-datalabels": "2.2.0",
+    "date-fns": "4.4.0",
+    "marked": "18.2.0",
+    "moment": "2.31.0",
+    "rxjs": "7.8.2",
+    "tslib": "2.9.1",
+    "zone.js": "0.16.3",
+    "@ngbracket/ngx-layout": "22.0.2",
+    "ngx-cookie-service": "22.2.0",
+    "@angular/material-moment-adapter": "22.2.7"
+  },
+  "devDependencies": {
+    "@angular/cli": "22.2.7",
+    "@angular/compiler-cli": "22.2.6",
+    "@types/node": "24.19.2",
+    "typescript": "6.0.3",
+    "@angular/build": "22.2.7"
+  },
+  "engines": {
+    "node": "^24.15.0"
+  }
+}

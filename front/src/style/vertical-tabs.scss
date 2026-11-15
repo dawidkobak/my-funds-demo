@@ -1,0 +1,94 @@
+:host {
+::ng-deep {
+  .vertical-tab-group {
+    &.mat-mdc-tab-group {
+      flex-direction: row !important;
+    }
+
+    &.mat-mdc-tab-header {
+      border-bottom: none !important;
+    }
+
+    .mat-mdc-tab-header-pagination {
+      display: none !important;
+    }
+
+    .mat-mdc-tab-labels {
+      flex-direction: column !important;
+    }
+
+    .mat-mdc-ink-bar {
+      height: auto;
+      left: 98% !important;
+    }
+
+    .mat-mdc-tab-body-wrapper {
+      flex: 1 1 auto;
+    }
+
+    .mat-mdc-tab-body-active {
+      overflow-y: hidden !important;
+    }
+
+    .mdc-tab-indicator {
+      display: none !important;
+    }
+
+    .mdc-tab-indicator--active .mdc-tab__text-label button {
+      border-radius: 14px;
+      background-color: #292929;
+      overflow: hidden;
+      color: #FBFBFB !important;
+    }
+
+    .mdc-tab-indicator--active .mdc-tab__text-label {
+      color: rgba(0, 0, 0, 0.8) !important;
+    }
+
+    .mdc-tab__text-label {
+      flex-direction: column !important;
+    }
+
+    .vertical-tab-group-body {
+      border-radius: 20px 20px 0 0 !important;
+      height: 100% !important;
+    }
+
+    .mat-mdc-tab-body-content {
+      padding: 5px 20px 0 5px !important;
+    }
+
+    .mat-mdc-tab {
+      height: auto !important;
+      padding: 5px 4px 15px 4px !important;
+    }
+
+    .mat-mdc-tab .mdc-tab__ripple::before {
+      background-color: transparent !important;
+    }
+
+    .menu-icon-label {
+      padding-top: 5px;
+      max-width: 120px;
+      white-space: normal;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+  @media (max-width: 700px) {
+    ::ng-deep .container {padding: 10px !important; max-width: calc(100% - 16px) !important;}
+    ::ng-deep .vertical-tab-group {
+      .vertical-tab-group-body {min-width: 0 !important; width: 100% !important; max-width: 100% !important; box-sizing: border-box;}
+      &.mat-mdc-tab-group {flex-direction: column !important; min-width: 0; width: 100%;}
+      > .mat-mdc-tab-header {width: 100%; min-width: 0;}
+      > .mat-mdc-tab-header .mat-mdc-tab-label-container {overflow-x: auto;}
+      > .mat-mdc-tab-header .mat-mdc-tab-labels {flex-direction: row !important;}
+      > .mat-mdc-tab-header .mat-mdc-tab {min-width: 86px; width: 86px; flex: 0 0 86px;}
+      > .mat-mdc-tab-body-wrapper {min-width: 0; width: 100%;}
+      .mat-mdc-tab-body-content {padding: 0 !important;}
+      .menu-icon-label {font-size: 10px;}
+    }
+  }
+}

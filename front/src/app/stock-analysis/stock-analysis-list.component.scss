@@ -1,0 +1,128 @@
+:host {
+  mat-card-content {
+    padding-top: 24px;
+  }
+
+  mat-table {
+    ::ng-deep {
+      .mat-column-companyName {
+        flex: 0 0 16%;
+        max-width: 16%;
+      }
+
+      .mat-column-ticker {
+        flex: 0 0 7%;
+        max-width: 7%;
+      }
+
+      .mat-column-industry {
+        flex: 0 0 13%;
+        max-width: 13%;
+      }
+
+      .mat-column-status {
+        flex: 0 0 10%;
+        max-width: 10%;
+      }
+
+      .mat-column-totalScore {
+        flex: 0 0 7%;
+        max-width: 7%;
+      }
+
+      .mat-column-decision {
+        flex: 0 0 13%;
+        max-width: 13%;
+      }
+
+      .mat-column-createdAt {
+        flex: 0 0 12%;
+        max-width: 12%;
+      }
+
+      .mat-column-completedAt {
+        flex: 0 0 12%;
+        max-width: 12%;
+      }
+
+      .mat-column-actions {
+        flex: 0 0 10%;
+        max-width: 10%;
+      }
+    }
+  }
+
+  .status-chip {
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    white-space: nowrap;
+  }
+
+  .status-pending {
+    background-color: #eef2ff;
+    color: #3140a0;
+  }
+
+  .status-processing {
+    background-color: #fff7e6;
+    color: #9a5b00;
+  }
+
+  .status-completed {
+    background-color: #eaf7ee;
+    color: #20743a;
+  }
+
+  .status-failed {
+    background-color: #fdecec;
+    color: #b3261e;
+  }
+
+  .create-button {
+    background-color: #0864dc !important;
+    color: white !important;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      background-color: #0652b8 !important;
+    }
+
+    fa-icon {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .view-button {
+    border: 1.5px solid #0864dc !important;
+    color: #0864dc !important;
+    padding: 0.5rem 0.75rem !important;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    white-space: nowrap !important;
+
+    &:hover:not(:disabled) {
+      background-color: #0864dc !important;
+      color: white !important;
+    }
+
+    &:disabled {
+      border-color: #c7c7c7 !important;
+      color: #999 !important;
+    }
+
+    fa-icon {
+      line-height: 1;
+      margin-right: 8px;
+    }
+
+    span {
+      line-height: 1;
+    }
+  }
+}

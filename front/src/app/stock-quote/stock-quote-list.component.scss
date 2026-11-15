@@ -1,0 +1,51 @@
+:host {
+  .quote-selector-row {
+    margin-bottom: 20px;
+    padding-top: 10px;
+  }
+
+  .create-button {
+    background-color: #0864dc !important;
+    color: white !important;
+    font-weight: 500;
+
+    &:hover {
+      background-color: #0652b8 !important;
+    }
+
+    fa-icon {
+      margin-right: 8px;
+    }
+  }
+
+  .quote-select {
+    min-width: 250px;
+  }
+
+  h3 {
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.87);
+  }
+
+  .quotes-table {
+    width: 100%;
+    margin-top: 20px;
+
+    mat-header-cell {
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.87);
+    }
+
+    mat-cell {
+      color: rgba(0, 0, 0, 0.87);
+    }
+
+    mat-row {
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    }
+  }
+}

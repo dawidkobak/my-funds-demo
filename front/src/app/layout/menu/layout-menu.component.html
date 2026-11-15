@@ -1,0 +1,94 @@
+<div class="menu" fxLayout="row" fxLayoutGap="25px">
+  <div class="c-pointer" [matMenuTriggerFor]="firstMenu" fxLayoutGap="10px">
+    <span>Menu 1</span>
+    <fa-icon matSuffix [icon]="['fas', 'angle-down']"></fa-icon>
+  </div>
+
+  <mat-menu #firstMenu="matMenu">
+    <a [routerLink]="['/module1/endpoint1']">
+      <button mat-menu-item>
+        <fa-icon matPrefix [icon]="['fas', 'comments']"></fa-icon>
+        Item 1
+      </button>
+    </a>
+    <a [routerLink]="['/module1/endpoint2']">
+      <button mat-menu-item>
+        <fa-icon matPrefix [icon]="['fas', 'comments']"></fa-icon>
+        Item 2
+      </button>
+    </a>
+  </mat-menu>
+  <div class="c-pointer" [matMenuTriggerFor]="nextMenu" fxLayoutGap="10px">
+    <span>Menu 2</span>
+    <fa-icon matSuffix [icon]="['fas', 'angle-down']"></fa-icon>
+  </div>
+  <mat-menu #nextMenu="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="nestedMenu">
+      <fa-icon matPrefix [icon]="['fas', 'comments']"></fa-icon>
+      Menu expandable
+    </button>
+
+    <a [routerLink]="['/module2/endpoint1']">
+      <button mat-menu-item>
+        <fa-icon matPrefix [icon]="['fas', 'comments']"></fa-icon>
+        Menu item
+      </button>
+    </a>
+    <a [routerLink]="['/module2/endpoint2']">
+      <button mat-menu-item>
+        <fa-icon matPrefix [icon]="['fas', 'wine-bottle']"></fa-icon>
+        Menu other icon
+      </button>
+    </a>
+    <a [routerLink]="['/module2/endpoint3']">
+      <button [disabled]="true" mat-menu-item matTooltip="Thanks" matTooltipPosition="above">
+        <fa-icon matPrefix [icon]="['fas', 'wine-bottle']"></fa-icon>
+        Menu disabled
+      </button>
+    </a>
+  </mat-menu>
+
+  <mat-menu #nestedMenu="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="communicationMenu">Nested expansion</button>
+    <a [routerLink]="['/module2/sth/endpoint1']">
+      <button mat-menu-item>Link</button>
+    </a>
+  </mat-menu>
+  <mat-menu #communicationMenu="matMenu">
+    <a [routerLink]="['/module2/sth/endpoint2']">
+      <button [disabled]="true" mat-menu-item matTooltip="Tooltip message" matTooltipPosition="above">
+        <fa-icon matPrefix [icon]="['fas', 'wine-bottle']"></fa-icon>
+        Link with icon
+      </button>
+    </a>
+    <a [routerLink]="['/module1/endpoint4']">
+      <button mat-menu-item>Most nested link</button>
+    </a>
+  </mat-menu>
+  <div class="c-pointer" [matMenuTriggerFor]="reportingMenu" fxLayoutGap="10px">
+    <span>Menu 3</span>
+    <fa-icon matSuffix [icon]="['fas', 'angle-down']"></fa-icon>
+  </div>
+  <mat-menu #reportingMenu="matMenu">
+    <a [routerLink]="['/']">
+      <button mat-menu-item>Home</button>
+    </a>
+  </mat-menu>
+  <mat-menu #outreachMenu="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="communicationMenu">Nested expansion</button>
+    <a [routerLink]="['/module5/enpoint3']">
+      <button mat-menu-item>Expanded 1</button>
+    </a>
+  </mat-menu>
+  <mat-menu #communicationMenu="matMenu">
+    <a [routerLink]="['/module3/endpoint1']">
+      <button mat-menu-item>Most nested link</button>
+    </a>
+    <a [routerLink]="['/module4/enpoint1']">
+      <button mat-menu-item>
+        <fa-icon matPrefix [icon]="['fas', 'wine-bottle']"></fa-icon>
+        Nested with icon
+      </button>
+    </a>
+  </mat-menu>
+</div>

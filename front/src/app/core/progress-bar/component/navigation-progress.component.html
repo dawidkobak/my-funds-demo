@@ -1,0 +1,6 @@
+<mat-progress-bar
+  color="accent"
+  [style.visibility]="!(loader.progress$ | async) ? 'hidden' : 'visible'"
+  mode="determinate"
+  [value]="loader.progress$ | async"
+></mat-progress-bar>

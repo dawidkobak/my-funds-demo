@@ -1,0 +1,19 @@
+<div class="vh-80" fxLayout="column">
+  <app-layout-header [sidenav]="sidenav"></app-layout-header>
+  <mat-sidenav-container fxFlex="100">
+    <mat-sidenav #sidenav mode="side" opened="false">
+      <app-layout-menu fxLayout="column"></app-layout-menu>
+    </mat-sidenav>
+    <mat-sidenav-content class="gradient" fxLayout="column" fxLayoutAlign="center">
+      <div class="red-gradient"></div>
+      <div fxLayoutAlign="center">
+        <div fxFlex="30" fxLayout="column" class="container">
+          <h1 class="mat-h1">Page not found</h1>
+          <div style="padding: 20px">
+            Nie znaleziono strony. Wróć do widoku portfela.
+          </div>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

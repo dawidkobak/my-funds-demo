@@ -1,0 +1,27 @@
+:host {
+  .filters {
+    margin-bottom: 20px;
+  }
+
+  .summary {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 20px;
+
+    .summary-label {
+      display: block;
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .summary-value {
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+
+  mat-table {
+    width: 100%;
+  }
+}

@@ -1,0 +1,46 @@
+<mat-card class="vertical-tab-group-body" fxFlex="auto">
+  <mat-card-header>
+    <mat-card-title fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
+      <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
+        <span>Listy notowań</span>
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="quote-selector-row">
+      <mat-form-field class="quote-select">
+        <mat-label>Notowanie</mat-label>
+        <mat-select [(ngModel)]="selectedStockQuote" (ngModelChange)="fetchStockQuote($event)">
+          @for (stockQuote of stockQuoteList; track stockQuote) {
+          <mat-option [value]="stockQuote">
+            <span>{{ stockQuote }}</span>
+          </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <button [disabled]="staticDemo" mat-raised-button (click)="openCreateDialog()" class="create-button">
+        <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+        Dodaj nowe notowanie
+      </button>
+    </div>
+
+    <div *ngIf="stockQuote">
+      <h3>Notowanie - {{ stockQuote.date }}</h3>
+
+      <mat-table [dataSource]="stockQuote.quotes" class="quotes-table">
+        <ng-container matColumnDef="stock">
+          <mat-header-cell *matHeaderCellDef> Aktywo </mat-header-cell>
+          <mat-cell *matCellDef="let quote"> {{ quote.stock.name }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="value">
+          <mat-header-cell *matHeaderCellDef> Wartość </mat-header-cell>
+          <mat-cell *matCellDef="let quote"> {{ quote.value }}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="['stock', 'value']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['stock', 'value'];"></mat-row>
+      </mat-table>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,36 @@
+:host {
+  .edit-button {
+    border: 1.5px solid #0864dc !important;
+    color: #0864dc !important;
+    margin-right: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #0864dc !important;
+      color: white !important;
+    }
+
+    fa-icon {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .delete-button {
+    border: 1.5px solid #dc3545 !important;
+    color: #dc3545 !important;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #dc3545 !important;
+      color: white !important;
+    }
+
+    fa-icon {
+      margin-right: 0.5rem;
+    }
+  }
+}

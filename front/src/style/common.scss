@@ -1,0 +1,41 @@
+.text-italic {
+  font-style: italic;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-bold {
+  font-weight: bold !important;
+}
+
+.flex-separator {
+  flex: 1 1 auto;
+}
+
+.c-pointer {
+  cursor: pointer !important;
+
+  span {
+    cursor: pointer !important;
+  }
+}
+
+.profile-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+[hidden], [aria-labelledby='hidden'] {
+  display: none !important;
+}
+
+[matprefix] {
+  padding-right: 10px;
+}

@@ -1,0 +1,144 @@
+<mat-card class="vertical-tab-group-body" fxFlex="auto">
+  <mat-card-header>
+    <mat-card-title
+      fxLayout="row"
+      fxLayoutGap="20px"
+      fxLayoutAlign="start center"
+    >
+      <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
+        <span>Monitorowanie inwestycji</span>
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <!-- Selects row -->
+    <div
+      fxLayout="row"
+      fxLayoutGap="20px"
+      fxLayoutAlign="start center"
+      class="mb-20"
+    >
+      <mat-form-field fxFlex="50">
+        <mat-label>Portfel</mat-label>
+        <mat-select
+          [(ngModel)]="selectedWallet"
+          (selectionChange)="onWalletChange()"
+        >
+          <mat-option *ngFor="let wallet of availableWallets" [value]="wallet">
+            {{ wallet.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="50" *ngIf="selectedWallet?.walletType !== 'BOND' || staticDemo">
+        <mat-label>Data notowania</mat-label>
+        <mat-select
+          [(ngModel)]="selectedStockQuoteDate"
+          (selectionChange)="onStockQuoteDateChange()"
+        >
+          <mat-option *ngFor="let quote of stockQuotes" [value]="quote">
+            {{ quote }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="50" *ngIf="selectedWallet?.walletType === 'BOND' && !staticDemo">
+        <mat-label>Data wyceny</mat-label>
+        <input
+          matInput
+          type="date"
+          [(ngModel)]="selectedStockQuoteDate"
+          (change)="onStockQuoteDateChange()"
+        />
+      </mat-form-field>
+    </div>
+
+    <!-- Portfolio value summary -->
+    <div *ngIf="selectedWallet" class="mb-20">
+      <h2 class="mat-h2">{{ selectedWallet.name }}</h2>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <span class="mat-h3">Wartość portfela:</span>
+        <span class="mat-h3"
+          >{{ totalPortfolioValue | number: '1.2-2' }} PLN</span
+        >
+      </div>
+    </div>
+
+    <!-- Charts row -->
+    <div class="charts-container mb-20">
+      <div class="chart-panel">
+        <portfolio-composition-chart
+          [assets]="dataSource.data"
+        ></portfolio-composition-chart>
+      </div>
+      <div class="chart-panel">
+        <value-over-time-chart
+          [walletValueInTime]="walletValueInTime"
+          [walletName]="selectedWallet?.name || ''"
+          [selectedDate]="selectedStockQuoteDate"
+          [steppedValueLine]="selectedWallet?.walletType === 'BOND'"
+        >
+        </value-over-time-chart>
+      </div>
+      <div class="chart-panel chart-panel-full">
+        <profit-over-time-chart
+          [walletValueInTime]="walletValueInTime"
+          [selectedDate]="selectedStockQuoteDate"
+        >
+        </profit-over-time-chart>
+      </div>
+    </div>
+
+    <!-- Assets table -->
+    <div class="mb-20" *ngIf="selectedWallet?.walletType !== 'NET_WORTH'">
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        class="full-width-table"
+      >
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Aktywo</th>
+          <td mat-cell *matCellDef="let asset">{{ asset.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Wartość</th>
+          <td mat-cell *matCellDef="let asset">
+            {{ asset.value | number: '1.2-2' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="purchaseDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Data zakupu</th>
+          <td mat-cell *matCellDef="let asset">{{ asset.purchaseDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="purchaseCost">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Koszt zakupu
+          </th>
+          <td mat-cell *matCellDef="let asset">
+            {{ asset.purchaseCost | number: '1.2-2' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="profitPerYear">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Średnioryczny Z/S [%]
+          </th>
+          <td
+            mat-cell
+            *matCellDef="let asset"
+            [style.color]="getProfitColor(calculatePerYearProfit(asset))"
+          >
+            {{ calculatePerYearProfit(asset) }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

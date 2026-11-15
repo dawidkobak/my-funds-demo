@@ -1,0 +1,60 @@
+<mat-card class="vertical-tab-group-body" fxFlex="auto">
+  <mat-card-header>
+    <mat-card-title fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
+        <span>Transakcje</span>
+      </div>
+      <button [disabled]="staticDemo" mat-raised-button (click)="openCreateDialog()" class="create-button">
+        <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+        Dodaj nową transakcję
+      </button>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-table fxLayout="column" [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="transactionType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Typ</mat-header-cell>
+        <mat-cell *matCellDef="let transaction">
+          <span [class]="transaction.transactionType === 'BUY' ? 'type-buy' : 'type-sell'">
+            {{ transaction.transactionType === 'BUY' ? 'Kupno' : 'Sprzedaż' }}
+          </span>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="stockName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Aktywo</mat-header-cell>
+        <mat-cell *matCellDef="let transaction"> {{ transaction.stock.name }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="walletName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Portfel </mat-header-cell>
+        <mat-cell *matCellDef="let transaction"> {{ transaction.wallet.name }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Ilość </mat-header-cell>
+        <mat-cell *matCellDef="let transaction"> {{ transaction.amount }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="purchaseCost">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Kwota </mat-header-cell>
+        <mat-cell *matCellDef="let transaction"> {{ transaction.purchaseCost }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="purchaseDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Data </mat-header-cell>
+        <mat-cell *matCellDef="let transaction"> {{ transaction.purchaseDate }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="modifications">
+        <mat-header-cell *matHeaderCellDef> Modyfikacje</mat-header-cell>
+        <mat-cell *matCellDef="let transaction" fxLayout="row" fxLayoutGap="8px">
+          <button [disabled]="staticDemo" mat-stroked-button (click)="openModifyDialog(transaction)" class="edit-button" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+            <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
+            <span>Edytuj</span>
+          </button>
+          <button [disabled]="staticDemo" mat-stroked-button (click)="openDeleteDialog(transaction)" class="delete-button" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+            <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+            <span>Usuń</span>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-card-content>
+</mat-card>

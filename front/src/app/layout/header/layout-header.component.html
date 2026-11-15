@@ -1,0 +1,19 @@
+<app-core-progress-bar></app-core-progress-bar>
+<mat-toolbar fxLayoutAlign="center center">
+  <div class="header-content" fxFlex="90" fxLayout="row" fxLayoutAlign="space-between">
+    <div class="header-brand" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="30px">
+      <a href="/" class="title" fxLayoutGap="10px" fxLayoutAlign="center center">
+        <img alt="" height="48" src="/assets/logo.png" />
+      </a>
+
+      <span class="demo-badge">DEMO · fikcyjne dane · 13.11.2026</span>
+    </div>
+
+    <div class="header-profile" fxLayout="row" fxLayoutGap="30px" fxFlex="60" fxLayoutAlign="end center">
+      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+        <img class="profile-icon" alt="" src="assets/error.png" />
+        <div class="profile">{{identity.displayName}}<span *ngIf="environment.staticDemo"> · tylko odczyt</span></div>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>

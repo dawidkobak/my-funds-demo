@@ -1,0 +1,67 @@
+<mat-card class="vertical-tab-group-body" fxFlex="auto">
+  <mat-card-header>
+    <mat-card-title fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
+        <span>Skarbonki</span>
+      </div>
+      <button [disabled]="staticDemo" mat-raised-button (click)="openCreateDialog()" class="create-button">
+        <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+        Dodaj nową skarbonkę
+      </button>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-table fxLayout="column" [dataSource]="piggyBanks">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Cel </mat-header-cell>
+        <mat-cell *matCellDef="let piggyBank"> {{ piggyBank.name }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="currentAmount">
+        <mat-header-cell *matHeaderCellDef> Zebrano </mat-header-cell>
+        <mat-cell *matCellDef="let piggyBank"> {{ piggyBank.currentAmount }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="aimAmount">
+        <mat-header-cell *matHeaderCellDef> Kwota </mat-header-cell>
+        <mat-cell *matCellDef="let piggyBank"> {{ piggyBank.aimAmount }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="percentage">
+        <mat-header-cell *matHeaderCellDef> Procent </mat-header-cell>
+        <mat-cell *matCellDef="let piggyBank"> {{ ((piggyBank.currentAmount / piggyBank.aimAmount) * 100).toFixed(2) }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="dueDate">
+        <mat-header-cell *matHeaderCellDef> Termin </mat-header-cell>
+        <mat-cell *matCellDef="let piggyBank"> {{ piggyBank.dueDate }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="remainingDays">
+        <mat-header-cell *matHeaderCellDef> Pozostało dni </mat-header-cell>
+        <mat-cell *matCellDef="let piggyBank"> {{ calcRemainingDays(piggyBank).toFixed(0) }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="link">
+        <mat-header-cell *matHeaderCellDef> Link </mat-header-cell>
+        <mat-cell *matCellDef="let piggyBank">
+          <a *ngIf="piggyBank.link" [href]="piggyBank.link" target="_blank" rel="noopener noreferrer" class="view-file-link">
+            <button mat-stroked-button class="view-file-button" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+              <fa-icon [icon]="['fas', 'file-excel']"></fa-icon>
+              <span>View file</span>
+            </button>
+          </a>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="modifications">
+        <mat-header-cell *matHeaderCellDef> Modyfikacje</mat-header-cell>
+        <mat-cell *matCellDef="let piggyBank" fxLayout="row" fxLayoutGap="8px">
+          <button [disabled]="staticDemo" mat-stroked-button (click)="openModifyDialog(piggyBank)" class="edit-button" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+            <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
+            <span>Edytuj</span>
+          </button>
+          <button [disabled]="staticDemo" mat-stroked-button (click)="openDeleteDialog(piggyBank)" class="delete-button" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+            <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+            <span>Usuń</span>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="['name', 'currentAmount', 'aimAmount', 'percentage', 'dueDate', 'remainingDays', 'link', 'modifications']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['name', 'currentAmount', 'aimAmount', 'percentage', 'dueDate', 'remainingDays', 'link', 'modifications'];"></mat-row>
+    </mat-table>
+  </mat-card-content>
+</mat-card>

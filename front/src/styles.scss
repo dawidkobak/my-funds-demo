@@ -1,0 +1,87 @@
+@use '@angular/material' as mat;
+@use 'sass:meta';
+@use 'variables' as *;
+
+@include mat.core();
+
+html {
+  --mdc-typography-body1-font-size: 14px;
+  --mdc-typography-body1-letter-spacing: normal;
+  --mdc-typography-body2-letter-spacing: normal;
+  --mdc-typography-button-letter-spacing: normal;
+  --mdc-plain-tooltip-supporting-text-tracking: normal;
+  --mdc-dialog-supporting-text-color: black !important;
+  --mdc-typography-caption-line-height: 25px;
+  --mat-menu-item-label-text-size: 14px !important;
+  --mat-option-label-text-size: 14px !important;
+  --mdc-filled-text-field-label-text-size: 14px !important;
+}
+
+* {
+  font-family: 'clean', sans-serif !important;
+  letter-spacing: normal !important;
+  -webkit-font-smoothing: initial !important;
+}
+
+$my-funds-theme: mat.m2-define-light-theme((
+  color: (
+    primary: mat.m2-define-palette($my-funds-palette, 500),
+    accent: mat.m2-define-palette($my-funds-palette-blue, 500),
+  ),
+  typography: mat.m2-define-typography-config(
+    $font-family: 'clean'
+  ),
+  density: 0,
+));
+
+@include mat.all-component-themes($my-funds-theme);
+@include mat.typography-hierarchy(mat.m2-define-typography-config(
+  $font-family: 'clean',
+  $subtitle-1: mat.m2-define-typography-level(16px, 24px, 700),
+  $subtitle-2: mat.m2-define-typography-level(16px, 24px, 700),
+  $headline-5: mat.m2-define-typography-level(24px, 32px, 700),
+));
+
+@include meta.load-css('style/body');
+@include meta.load-css('style/sidenav');
+@include meta.load-css('style/common');
+@include meta.load-css('style/buttons');
+@include meta.load-css('style/tables');
+@include meta.load-css('style/calendar');
+@include meta.load-css('style/menu');
+@include meta.load-css('style/tooltip');
+@include meta.load-css('style/card');
+@include meta.load-css('style/gradient');
+@include meta.load-css('style/chip');
+
+// Fix paginator
+.mat-paginator {
+  .mat-form-field-flex {
+    padding-top: 0 !important;
+  }
+}
+
+.mat-mdc-form-field-icon-prefix {
+  padding: 0 4px 0 10px !important;
+}
+
+.mat-mdc-form-field-icon-suffix {
+  padding: 0 10px 0 4px !important;
+}
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.mat-mdc-option .mdc-list-item__primary-text {
+  width: 100%;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__content {
+  color: black !important;
+}
+
+// Selectable mat chips
+.mdc-evolution-chip__text-label {
+  user-select: auto !important;
+}

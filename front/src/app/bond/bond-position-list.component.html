@@ -1,0 +1,85 @@
+<mat-card class="vertical-tab-group-body" fxFlex="auto">
+  <mat-card-header>
+    <mat-card-title fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
+        <span>Obligacje</span>
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center" class="filters">
+      <mat-form-field fxFlex="50">
+        <mat-label>Portfel</mat-label>
+        <mat-select [(ngModel)]="selectedWallet" (selectionChange)="onWalletChange()">
+          <mat-option *ngFor="let wallet of bondWallets" [value]="wallet">
+            {{ wallet.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="50">
+        <mat-label>Data wyceny</mat-label>
+        <mat-select *ngIf="staticDemo" [(ngModel)]="valuationDate" (selectionChange)="onValuationDateChange()"><mat-option *ngFor="let date of valuationDates" [value]="date">{{date}}</mat-option></mat-select>
+        <input *ngIf="!staticDemo" matInput type="date" [(ngModel)]="valuationDate" (change)="onValuationDateChange()" />
+      </mat-form-field>
+    </div>
+
+    <div class="summary" *ngIf="selectedWallet">
+      <div>
+        <span class="summary-label">Koszt zakupu</span>
+        <span class="summary-value">{{ totalPurchaseCost | number: '1.2-2' }} PLN</span>
+      </div>
+      <div>
+        <span class="summary-label">Aktualna wartość</span>
+        <span class="summary-value">{{ totalCurrentValue | number: '1.2-2' }} PLN</span>
+      </div>
+    </div>
+
+    <mat-table fxLayout="column" [dataSource]="dataSource">
+      <ng-container matColumnDef="symbol">
+        <mat-header-cell *matHeaderCellDef>Emisja</mat-header-cell>
+        <mat-cell *matCellDef="let bondPosition">{{ bondPosition.bondIssue.symbol }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="totalUnits">
+        <mat-header-cell *matHeaderCellDef>Liczba sztuk</mat-header-cell>
+        <mat-cell *matCellDef="let bondPosition">{{ bondPosition.totalUnits | number: '1.0-0' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="purchaseDate">
+        <mat-header-cell *matHeaderCellDef>Data zakupu</mat-header-cell>
+        <mat-cell *matCellDef="let bondPosition">{{ bondPosition.purchaseDate }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="maturityDate">
+        <mat-header-cell *matHeaderCellDef>Data wykupu</mat-header-cell>
+        <mat-cell *matCellDef="let bondPosition">{{ bondPosition.maturityDate }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="purchaseCost">
+        <mat-header-cell *matHeaderCellDef>Koszt</mat-header-cell>
+        <mat-cell *matCellDef="let bondPosition">{{ bondPosition.purchaseCost | number: '1.2-2' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="currentUnitValue">
+        <mat-header-cell *matHeaderCellDef>Wartość jednostki</mat-header-cell>
+        <mat-cell *matCellDef="let bondPosition">{{ bondPosition.currentUnitValue | number: '1.2-2' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="currentTotalValue">
+        <mat-header-cell *matHeaderCellDef>Wartość</mat-header-cell>
+        <mat-cell *matCellDef="let bondPosition">{{ bondPosition.currentTotalValue | number: '1.2-2' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="sourceCurrentValue">
+        <mat-header-cell *matHeaderCellDef>Wartość z arkusza</mat-header-cell>
+        <mat-cell *matCellDef="let bondPosition">
+          {{ bondPosition.sourceCurrentValue === null ? '-' : (bondPosition.sourceCurrentValue | number: '1.2-2') }}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </mat-card-content>
+</mat-card>

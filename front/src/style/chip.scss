@@ -1,0 +1,23 @@
+.mat-mdc-chip {
+  &.alert {
+    background-color: #ff1408 !important;
+
+    .mat-mdc-chip-action-label {
+      color: #e3e3e3 !important;
+    }
+  }
+  &.warn {
+    background-color: #d66701 !important;
+
+    .mat-mdc-chip-action-label {
+      color: #e3e3e3 !important;
+    }
+  }
+  &.valid {
+    background-color: #009139 !important;
+
+    .mat-mdc-chip-action-label {
+      color: #e3e3e3 !important;
+    }
+  }
+}

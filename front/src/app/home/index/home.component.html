@@ -1,0 +1,113 @@
+<div class="vh-80" fxLayout="column">
+  <app-layout-header [sidenav]="sidenav"></app-layout-header>
+  <mat-sidenav-container fxFlex="100">
+    <mat-sidenav #sidenav mode="side" opened="false">
+      <app-layout-menu fxLayout="column"></app-layout-menu>
+    </mat-sidenav>
+    <mat-sidenav-content class="gradient" fxLayout="column" fxLayoutAlign="center">
+      <div class="my-funds-gradient"></div>
+      <div fxLayoutAlign="center">
+        <div fxFlex="90" class="container" fxLayoutGap="20px" style="background-color: #FBFBFB">
+          <h1 class="mat-h3">
+            <div>
+
+            </div>
+          </h1>
+
+          <mat-tab-group class="vertical-tab-group" [disableRipple]="true" [selectedIndex]="getTabIndex()" (selectedTabChange)="setTabIndex($event)" animationDuration="0ms">
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <button mat-icon-button [disableRipple]="true">
+                  <fa-icon size="1x" [icon]="['fas', 'wallet']"></fa-icon>
+                </button>
+                <div class="menu-icon-label">Portfele</div>
+              </ng-template>
+              <wallet-list [wallets]="wallets"></wallet-list>
+            </mat-tab>
+
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <button mat-icon-button [disableRipple]="true">
+                  <fa-icon size="1x" [icon]="['fas', 'landmark']"></fa-icon>
+                </button>
+                <div class="menu-icon-label">Aktywa</div>
+              </ng-template>
+              <stock-list [stocks]="stocks"></stock-list>
+            </mat-tab>
+
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <button mat-icon-button [disableRipple]="true">
+                  <fa-icon size="1x" [icon]="['fas', 'money-bill-transfer']"></fa-icon>
+                </button>
+                <div class="menu-icon-label">Transakcje</div>
+              </ng-template>
+              <transaction-list [transactions]="transactions"></transaction-list>
+            </mat-tab>
+
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <button mat-icon-button [disableRipple]="true">
+                  <fa-icon size="1x" [icon]="['fas', 'landmark']"></fa-icon>
+                </button>
+                <div class="menu-icon-label">Obligacje</div>
+              </ng-template>
+              <bond-position-list [wallets]="wallets"></bond-position-list>
+            </mat-tab>
+
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <button mat-icon-button [disableRipple]="true">
+                  <fa-icon size="1x" [icon]="['fas', 'list']"></fa-icon>
+                </button>
+                <div class="menu-icon-label">Listy notowań</div>
+              </ng-template>
+              <stock-quote-list></stock-quote-list>
+            </mat-tab>
+
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <button mat-icon-button [disableRipple]="true">
+                  <fa-icon size="1x" [icon]="['fas', 'chart-line']"></fa-icon>
+                </button>
+                <div class="menu-icon-label">Monitorowanie inwestycji</div>
+              </ng-template>
+              <investment-monitoring [wallets]="wallets"></investment-monitoring>
+            </mat-tab>
+
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <button mat-icon-button [disableRipple]="true">
+                  <fa-icon size="1x" [icon]="['fas', 'basket-shopping']"></fa-icon>
+                </button>
+                <div class="menu-icon-label">Wydatki</div>
+              </ng-template>
+              <expense-list></expense-list>
+            </mat-tab>
+
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <button mat-icon-button [disableRipple]="true">
+                  <fa-icon size="1x" [icon]="['fas', 'piggy-bank']"></fa-icon>
+                </button>
+                <div class="menu-icon-label">Skarbonki</div>
+              </ng-template>
+              <piggy-bank-list [piggyBanks]="piggyBanks"></piggy-bank-list>
+            </mat-tab>
+
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <button mat-icon-button [disableRipple]="true">
+                  <fa-icon size="1x" [icon]="['fas', 'file-lines']"></fa-icon>
+                </button>
+                <div class="menu-icon-label">Analizy</div>
+              </ng-template>
+              <stock-analysis-list [stockAnalyses]="stockAnalyses" [stocks]="stocks"></stock-analysis-list>
+            </mat-tab>
+
+          </mat-tab-group>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

@@ -1,0 +1,76 @@
+name: my-funds-demo
+services:
+  mf-db:
+    image: postgres:18
+    container_name: my-funds-demo-db
+    environment:
+      POSTGRES_DB: my-funds-demo
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: demo-local-only
+    volumes:
+      - demo-postgres18-data:/var/lib/postgresql
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U postgres -d my-funds-demo]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  mf-sbt-api:
+    image: sbtscala/scala-sbt:graalvm-community-25.0.2_1.13.1_3.10.1
+    container_name: my-funds-demo-sbt-api
+    working_dir: /backend
+    environment:
+      ENVIRONMENT: development
+      PGSQL_DB_PASSWORD: demo-local-only
+    volumes:
+      - ./backend:/backend
+      - demo-sbt-cache:/root/.cache
+      - demo-sbt-home:/root/.sbt
+      - demo-ivy:/root/.ivy2
+    depends_on:
+      mf-db:
+        condition: service_healthy
+    command: sbt "~api/reStart"
+    healthcheck:
+      test: [CMD-SHELL, "curl -fsS http://localhost:8088/api/healthcheck"]
+      interval: 10s
+      timeout: 5s
+      retries: 60
+  mf-node:
+    image: node:24-bookworm-slim
+    container_name: my-funds-demo-node
+    working_dir: /front
+    environment:
+      NPM_CONFIG_CACHE: /npm-cache
+    volumes:
+      - ./front:/front
+      - demo-node-modules:/front/node_modules
+      - demo-npm-cache:/npm-cache
+    command: sh -c "npm ci --no-audit && npm run start -- --host 0.0.0.0"
+  mf-web:
+    image: nginx:stable-alpine
+    container_name: my-funds-demo-web
+    ports:
+      - "127.0.0.1:9083:80"
+    volumes:
+      - ./build/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      mf-node:
+        condition: service_started
+      mf-sbt-api:
+        condition: service_started
+  mf-static:
+    profiles: [preview]
+    image: nginx:stable-alpine
+    container_name: my-funds-demo-static
+    ports:
+      - "127.0.0.1:9084:80"
+    volumes:
+      - ./front/dist/my-funds-demo:/usr/share/nginx/html:ro
+      - ./build/static-nginx.conf:/etc/nginx/conf.d/default.conf:ro
+volumes:
+  demo-postgres18-data:
+  demo-sbt-cache:
+  demo-sbt-home:
+  demo-ivy:
+  demo-node-modules:
+  demo-npm-cache:
